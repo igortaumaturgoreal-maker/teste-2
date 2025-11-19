@@ -1,0 +1,10 @@
+# api/fipe/fipe_api.py
+import requests
+
+def get_fipe(brand, model, year):
+    # substituir pela API real / método de busca por código FIPE
+    # exemplo fictício:
+    url = f"https://api.fipe.example/get?brand={brand}&model={model}&year={year}"
+    r = requests.get(url, timeout=10)
+    data = r.json()
+    return int(data['price'].replace(".", "").replace("R$",""))
