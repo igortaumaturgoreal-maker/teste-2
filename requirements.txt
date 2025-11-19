@@ -1,0 +1,11 @@
+requests
+beautifulsoup4
+lxml
+python-dotenv
+sqlite3  # nativo, não precisa no pip
+schedule
+python-telegram-bot==20.4
+twilio
+pandas
+gspread
+oauth2client
