@@ -1,1 +1,8 @@
-
+{
+  "functions": {
+    "api/main.py": {"runtime": "python3.11"}
+  },
+  "cron": [
+    {"path": "api/main.py", "schedule": "*/1 * * * *"}
+  ]
+}
