@@ -1,1 +1,41 @@
+# api/scraping/olx.py
+import requests
+from bs4 import BeautifulSoup
+from datetime import datetime
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+}
+
+def buscar_olx(pagina=1):
+    resultados = []
+    url = f"https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios?q=&o={pagina}"
+    r = requests.get(url, headers=HEADERS, timeout=15)
+    soup = BeautifulSoup(r.text, "lxml")
+
+    # adaptar seletor conforme html do site (pode mudar)
+    itens = soup.select("li.sc-1fcmfeb-2")  # EXEMPLO — verificar no HTML real
+    for it in itens:
+        try:
+            titulo = it.select_one("h2").get_text(strip=True)
+            link = it.select_one("a")['href']
+            preco_text = it.select_one(".sc-1x0vz2r-1").get_text(strip=True)
+            preco = int(preco_text.replace("R$", "").replace(".", "").replace(" ", ""))
+            # extrair outros campos (km, ano, anunciante)
+            anunciante = "particular"  # lógica pra checar (ex: ausência de CNPJ, badge)
+            resultados.append({
+                "portal": "OLX",
+                "data_hora": datetime.utcnow().isoformat(),
+                "anunciante": anunciante,
+                "contato": None,
+                "modelo": titulo,
+                "ano": 2018, # parsing necessário
+                "km": 90000,
+                "preco": preco,
+                "link": link,
+                "local": "Maricá, RJ"
+            })
+        except Exception:
+            continue
+    return resultados
 
