@@ -1,1 +1,22 @@
-
+agente-oportunidades-automotivas/
+├── api/
+│   ├── scraping/
+│   │   ├── olx.py
+│   │   ├── webmotors.py
+│   │   ├── icarros.py
+│   │   ├── mobiauto.py
+│   │   └── facebook.py  # opcional
+│   ├── fipe/
+│   │   └── fipe_api.py
+│   ├── utils/
+│   │   ├── filtros.py
+│   │   ├── db.py
+│   │   └── notificacao.py
+│   ├── cron/
+│   │   └── buscar_cada_minuto.py
+│   └── main.py
+├── data/
+│   └── oportunidades.db
+├── requirements.txt
+├── vercel.json
+└── README.md
