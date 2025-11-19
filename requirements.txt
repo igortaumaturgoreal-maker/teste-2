@@ -9,3 +9,4 @@ twilio
 pandas
 gspread
 oauth2client
+python -m pip install -r requirements.txt
